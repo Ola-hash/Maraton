@@ -30,36 +30,42 @@ public class Maraton {
         }
     }
 
-    public String sekundyNaGodziny(int wartosc) {
+    public String minutyNaGodziny(int wartosc) {
         String wynik = "";
-        int liczbaSekund = wartosc % 60;
-        int liczbaMinut = wartosc / 60;
-        return wynik += liczbaMinut + " minut i " + liczbaSekund + " sekund.";
-
+        int liczbaMiut = wartosc % 60;
+        int liczbaGodzin = wartosc / 60;
+        return wynik += liczbaGodzin + "h i " + liczbaMiut + " minut, ";
     }
 
     public void najszybszyUczestnik() {
         int min = Integer.MAX_VALUE;
         String wartosc = null;
+        int indeks = 0;
         for (int i = 0; i < czas.size(); i++) {
             if (czas.get(i) < min) {
-
-                wartosc = sekundyNaGodziny(min = czas.get(i));
+                min = czas.get(i);
+                indeks = i;
             }
         }
-        System.out.println("Najszybszy uczestnik maratonu uzyskał czas " + wartosc);
+        String imie=uczestnicy.get(indeks);
+        wartosc = minutyNaGodziny(min);
+        System.out.println("Najszybszy uczestnik maratonu uzyskał czas " + wartosc+"jest to "+imie+".");
     }
 
 
     public void najwolniejszyUczestnik() {
         String wartosc = null;
         int max = Integer.MIN_VALUE;
+        int indeks = 0;
         for (int i = 0; i < czas.size(); i++) {
             if (czas.get(i) > max) {
-                wartosc = sekundyNaGodziny(max = czas.get(i));
+                max = czas.get(i);
+                indeks = i;
             }
         }
-        System.out.println("Najwolniejszy uczestnik maratonu uzyskal czas " + wartosc);
+        String imie=uczestnicy.get(indeks);
+        wartosc = minutyNaGodziny(max);
+        System.out.println("Najwolniejszy uczestnik maratonu uzyskal czas " + wartosc+"jest to "+imie);
     }
 
 }
